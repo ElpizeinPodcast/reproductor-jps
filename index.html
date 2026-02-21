@@ -35,22 +35,11 @@
         /* --- FONDO DINÁMICO METALIZADO --- */
         .metallic-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                #172B4D 0%,    
-                #2D5A8D 25%,   
-                #85CEE6 50%,   
-                #2D5A8D 75%,
-                #172B4D 100%
-            );
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #172B4D 0%, #2D5A8D 25%, #85CEE6 50%, #2D5A8D 75%, #172B4D 100%);
             background-size: 400% 400%; 
             animation: metallic-shine 8s ease infinite alternate; 
-            z-index: -1; 
-            opacity: 0.8; 
+            z-index: -1; opacity: 0.8; 
         }
 
         @keyframes metallic-shine {
@@ -60,70 +49,42 @@
 
         /* --- ESTILOS NEUMÓRFICOS --- */
         .neu-panel {
-            background: var(--bg-panel);
-            backdrop-filter: blur(5px);
+            background: var(--bg-panel); backdrop-filter: blur(5px);
             border-radius: 1rem;
-            box-shadow: 8px 8px 16px var(--shadow-dark), 
-                        -4px -4px 12px var(--shadow-light);
+            box-shadow: 8px 8px 16px var(--shadow-dark), -4px -4px 12px var(--shadow-light);
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .deck-glow-blue {
             border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 
-                        inset 0 0 10px rgba(6, 182, 212, 0.1);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(6, 182, 212, 0.1);
         }
 
         .deck-glow-yellow {
             border: 2px solid var(--neon-yellow);
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4), 
-                        inset 0 0 10px rgba(251, 191, 36, 0.1);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4), inset 0 0 10px rgba(251, 191, 36, 0.1);
         }
 
         .neu-pressed {
-            background: #181a20;
-            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
-                        inset -5px -5px 10px var(--shadow-light);
-            border-radius: 0.5rem;
-            border: none;
+            background: #181a20; border-radius: 0.5rem; border: none;
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
         }
 
         .neu-btn {
-            background: linear-gradient(145deg, #23262e, #1c1e24);
-            box-shadow: 5px 5px 10px var(--shadow-dark), 
-                        -2px -2px 5px var(--shadow-light);
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
-            color: #94a3b8;
-            border: 1px solid rgba(255,255,255,0.02);
+            background: linear-gradient(145deg, #23262e, #1c1e24); border-radius: 0.5rem;
+            box-shadow: 5px 5px 10px var(--shadow-dark), -2px -2px 5px var(--shadow-light);
+            transition: all 0.2s ease; color: #94a3b8; border: 1px solid rgba(255,255,255,0.02);
         }
 
-        .neu-btn:hover {
-            color: #fff;
-            transform: translateY(-1px);
-        }
-
-        .neu-btn:active {
-            transform: translateY(1px);
-            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
-                        inset -2px -2px 5px var(--shadow-light);
-        }
+        .neu-btn:hover { color: #fff; transform: translateY(-1px); }
+        .neu-btn:active { transform: translateY(1px); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); }
 
         .neu-btn-circle {
-            border-radius: 50%;
-            background: linear-gradient(145deg, #23262e, #1c1e24);
-            box-shadow: 6px 6px 12px var(--shadow-dark), 
-                        -3px -3px 8px var(--shadow-light);
-            transition: all 0.2s ease;
-            color: #fff;
-            position: relative;
+            border-radius: 50%; background: linear-gradient(145deg, #23262e, #1c1e24);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+            transition: all 0.2s ease; color: #fff; position: relative;
         }
-        
-        .neu-btn-circle:active {
-            box-shadow: inset 4px 4px 8px var(--shadow-dark), 
-                        inset -2px -2px 4px var(--shadow-light);
-            transform: scale(0.95);
-        }
+        .neu-btn-circle:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light); transform: scale(0.95); }
 
         .glow-text-blue { text-shadow: 0 0 15px rgba(6, 182, 212, 0.9); }
         .glow-text-yellow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.9); }
@@ -140,15 +101,25 @@
             border: 1px solid rgba(251, 191, 36, 0.3);
         }
 
-        input[type=range] { -webkit-appearance: none; background: transparent; }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
-            background: #e2e8f0; box-shadow: 0 0 10px rgba(255,255,255,0.5);
-            margin-top: -6px; cursor: pointer;
+        /* --- CROSSFADER DJ ESTILOS --- */
+        #crossfader {
+            -webkit-appearance: none; background: transparent !important; height: 100%;
         }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 4px; cursor: pointer; background: #131419;
-            box-shadow: inset 1px 1px 3px #000; border-radius: 2px;
+        #crossfader::-webkit-slider-runnable-track {
+            width: 100%; height: 100%; background: transparent; border: none;
+        }
+        #crossfader::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 48px; width: 28px; border-radius: 4px;
+            background: linear-gradient(to right, #1a1c23, #2a2d38, #1a1c23);
+            border: 2px solid #000;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.8), 4px 0 10px rgba(0,0,0,0.8), inset 0 0 4px rgba(255,255,255,0.3);
+            cursor: grab; position: relative; z-index: 20;
+            background-image: linear-gradient(to right, transparent 45%, #fff 45%, #fff 55%, transparent 55%);
+        }
+        #crossfader::-webkit-slider-thumb:active {
+            cursor: grabbing; background: linear-gradient(to right, #15171d, #22242e, #15171d);
+            background-image: linear-gradient(to right, transparent 45%, #06b6d4 45%, #06b6d4 55%, transparent 55%);
+            box-shadow: -4px 0 10px rgba(0,0,0,0.9), 4px 0 10px rgba(0,0,0,0.9), 0 0 10px rgba(6, 182, 212, 0.5);
         }
 
         .deck-canvas { width: 100%; height: 80px; background-color: transparent; border-radius: 0.5rem; }
@@ -165,12 +136,6 @@
             background-color: rgba(6, 182, 212, 0.05);
         }
 
-        #crossfader {
-            height: 12px; border-radius: 6px; background: #131419;
-            box-shadow: inset 2px 2px 5px #000, inset -1px -1px 2px #333;
-        }
-        #crossfader.crossfader-glow { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
-
         .playlist-item { background-color: transparent; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .playlist-item:hover { background-color: rgba(255,255,255,0.03); color: var(--neon-blue); }
 
@@ -185,11 +150,16 @@
         .modal-content-neu {
             background: var(--bg-panel); box-shadow: 0 0 30px #000; border: 1px solid rgba(255,255,255,0.05);
         }
-
     </style>
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden select-none">
     
+    <div class="fixed top-4 right-6 z-50 bg-[#1f2229] bg-opacity-80 px-3 py-1 rounded-lg border border-gray-700 shadow-lg backdrop-blur-sm">
+        <div id="clockDeckB" class="text-xl font-mono text-yellow-400 glow-text-yellow" style="font-family: 'Share Tech Mono', monospace;">
+            00:00:00 AM
+        </div>
+    </div>
+
     <div class="metallic-background"></div>
 
     <aside class="w-full md:w-1/3 lg:w-1/4 p-4 flex flex-col z-10 relative bg-[#1f2229] border-r border-[#2a2e38] shadow-2xl">
@@ -259,23 +229,28 @@
         </div>
     </aside>
 
-    <main class="flex-grow flex flex-col p-2 md:p-4 z-10 overflow-hidden">
+    <main class="flex-grow flex flex-col p-2 md:p-4 z-10">
         
         <section class="neu-panel p-4 mb-4 flex flex-col items-center justify-center relative bg-opacity-90">
-            <div class="absolute top-2 right-4 text-xl md:text-2xl font-mono text-yellow-400 glow-text-yellow" id="clockDeckB" style="font-family: 'Share Tech Mono', monospace;">
-                00:00:00
-            </div>
-            
-            <label for="crossfader" class="block text-sm font-bold tracking-[0.2em] text-gray-300 mb-2 mt-4 md:mt-0">CROSSFADER</label>
-            <div class="crossfader-container w-full max-w-lg">
-                <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" class="w-full cursor-pointer">
-                <span id="crossfaderValueDisplay" class="block mt-2 font-mono text-yellow-400 text-lg text-center">CENTER</span>
+            <label for="crossfader" class="block text-sm font-bold tracking-[0.2em] text-gray-300 mb-3 text-cyan-400 glow-text-blue">CROSSFADER DJ</label>
+            <div class="w-full max-w-2xl relative px-4">
+                <div id="crossfaderTrack" class="relative w-full h-12 bg-[#0a0a0c] rounded-lg border border-[#222] shadow-[inset_0_5px_15px_rgba(0,0,0,1)] flex items-center overflow-hidden">
+                    <div class="absolute inset-0 flex justify-between items-center px-4 pointer-events-none z-0 opacity-50">
+                        <div class="w-0.5 h-3 bg-gray-500"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div>
+                        <div class="w-0.5 h-6 bg-white shadow-[0_0_5px_#fff]"></div>
+                        <div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-500"></div>
+                    </div>
+                    <div id="crossfaderLeds" class="absolute inset-0 z-0 transition-all duration-100 ease-in-out"></div>
+                    <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" class="w-full cursor-pointer z-10 m-0 relative">
+                </div>
+                <div class="flex justify-center mt-3">
+                    <span id="crossfaderValueDisplay" class="font-mono text-yellow-400 text-lg font-bold bg-[#131419] px-4 py-1 rounded-md border border-gray-700 shadow-inner">CENTER</span>
+                </div>
             </div>
         </section>
 
-        <section class="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-4 overflow-y-auto">
-            
-            <div id="deckA" class="neu-panel deck-glow-blue p-4 flex flex-col drop-zone relative overflow-y-auto">
+        <section class="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div id="deckA" class="neu-panel deck-glow-blue p-4 flex flex-col drop-zone relative">
                 <div class="flex justify-between items-start mb-2">
                     <h3 class="text-2xl font-bold text-cyan-400 glow-text-blue">DECK A</h3>
                     <button id="clearDeckA" class="text-gray-400 hover:text-red-500 transition-colors" title="Expulsar">
@@ -308,23 +283,14 @@
                     <button id="stopA" class="neu-btn-circle w-12 h-12 flex items-center justify-center text-xl hover:text-red-500">
                         <i class="fas fa-stop"></i>
                     </button>
-                    
                     <div class="flex flex-col items-center w-1/3">
                         <input type="range" id="volumeA" min="0" max="1" step="0.01" value="1" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-cyan-500">
                         <span id="volumeDisplayA" class="text-xs text-cyan-400 font-bold mt-2">VOL: 100%</span>
                     </div>
                 </div>
-                
-                <div class="w-full mt-2 flex items-center justify-center space-x-2">
-                    <input type="text" id="ytInputA" placeholder="Pega el link de YouTube aquí..." class="w-3/4 p-2 rounded search-input-neu text-sm text-center">
-                    <button id="ytBtnA" class="neu-btn px-4 py-2 text-sm font-bold text-cyan-400 hover:text-white transition-colors">Ver</button>
-                </div>
-                <div id="ytContainerA" class="w-full mt-4 hidden justify-center flex-grow">
-                    <iframe id="ytIframeA" class="w-full h-40 md:h-48 rounded-lg shadow-lg border border-cyan-500/30" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
             </div>
 
-            <div id="deckB" class="neu-panel deck-glow-yellow p-4 flex flex-col drop-zone relative overflow-y-auto">
+            <div id="deckB" class="neu-panel deck-glow-yellow p-4 flex flex-col drop-zone relative">
                 <div class="flex justify-between items-start mb-2">
                     <h3 class="text-2xl font-bold text-yellow-400 glow-text-yellow">DECK B</h3>
                     <button id="clearDeckB" class="text-gray-400 hover:text-red-500 transition-colors" title="Expulsar">
@@ -357,22 +323,12 @@
                     <button id="stopB" class="neu-btn-circle w-12 h-12 flex items-center justify-center text-xl hover:text-red-500">
                         <i class="fas fa-stop"></i>
                     </button>
-                    
                     <div class="flex flex-col items-center w-1/3">
                         <input type="range" id="volumeB" min="0" max="1" step="0.01" value="1" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-yellow-500">
                         <span id="volumeDisplayB" class="text-xs text-yellow-400 font-bold mt-2">VOL: 100%</span>
                     </div>
                 </div>
-
-                <div class="w-full mt-2 flex items-center justify-center space-x-2">
-                    <input type="text" id="ytInputB" placeholder="Pega el link de YouTube aquí..." class="w-3/4 p-2 rounded search-input-neu text-sm text-center">
-                    <button id="ytBtnB" class="neu-btn px-4 py-2 text-sm font-bold text-yellow-400 hover:text-white transition-colors">Ver</button>
-                </div>
-                <div id="ytContainerB" class="w-full mt-4 hidden justify-center flex-grow">
-                    <iframe id="ytIframeB" class="w-full h-40 md:h-48 rounded-lg shadow-lg border border-yellow-500/30" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
             </div>
-
         </section>
     </main>
 
@@ -388,26 +344,19 @@
     </div>
 
     <script type="module">
-        // Elementos del DOM (Nuevos inputs y botones de búsqueda)
         const fileInputMusic = document.getElementById('fileInputMusic');
         const fileInputRecordings = document.getElementById('fileInputRecordings');
-        
         const searchMusicInput = document.getElementById('searchMusicInput');
         const clearSearchMusicBtn = document.getElementById('clearSearchMusicBtn');
         const searchRecordingsInput = document.getElementById('searchRecordingsInput');
         const clearSearchRecordingsBtn = document.getElementById('clearSearchRecordingsBtn');
-
         const playlistMusicElement = document.getElementById('playlistMusic');
         const playlistRecordingsElement = document.getElementById('playlistRecordings');
         const totalPlaylistTimeElement = document.getElementById('totalPlaylistTime');
         const crossfader = document.getElementById('crossfader');
         const crossfaderValueDisplay = document.getElementById('crossfaderValueDisplay');
-        const clockDeckB = document.getElementById('clockDeckB');
-
         const clearPlaylistButton = document.getElementById('clearPlaylistButton');
         const autoPlayQueueElement = document.getElementById('autoPlayQueue');
- 
-        // Modal de confirmación
         const confirmationModal = document.getElementById('confirmationModal');
         const confirmClearPlaylistButton = document.getElementById('confirmClearPlaylist');
         const cancelClearPlaylistButton = document.getElementById('cancelClearPlaylist');
@@ -429,7 +378,7 @@
                 dropZone: document.getElementById('deckA'),
                 clearButton: document.getElementById('clearDeckA'),
                 currentTrackName: null,
-                analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1,
+                analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1
             },
             B: {
                 audio: new Audio(),
@@ -447,14 +396,13 @@
                 dropZone: document.getElementById('deckB'),
                 clearButton: document.getElementById('clearDeckB'),
                 currentTrackName: null,
-                analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1,
+                analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1
             }
         };
 
         let audioContext;
         let playlist = []; 
         let autoPlayQueue = []; 
-
         let autoPlayCurrentDeckId = null; 
 
         function initAudioContext() {
@@ -479,7 +427,6 @@
         function updatePlayPauseButton(deckId, isPlaying) {
             const btn = decks[deckId].playPauseButton;
             btn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
-            
             if (deckId === 'A') {
                 if(isPlaying) btn.classList.add('btn-active-blue');
                 else btn.classList.remove('btn-active-blue');
@@ -488,9 +435,11 @@
                 else btn.classList.remove('btn-active-yellow');
             }
         }
-        
+
         function clearVisualizer(deckId) {
-            const deck = decks[deckId]; const canvas = deck.visualizerCanvas; const ctx = canvas.getContext('2d');
+            const deck = decks[deckId]; 
+            const canvas = deck.visualizerCanvas; 
+            const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
@@ -498,41 +447,49 @@
             const deck = decks[deckId];
             if (!deck.analyser || !deck.audio.src || deck.audio.paused) {
                 if(deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
-                deck.animationFrameId = null; clearVisualizer(deckId); return;
+                deck.animationFrameId = null; 
+                clearVisualizer(deckId); 
+                return;
             }
-            const canvas = deck.visualizerCanvas; const ctx = canvas.getContext('2d');
+            const canvas = deck.visualizerCanvas; 
+            const ctx = canvas.getContext('2d');
             if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
-                canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight;
+                canvas.width = canvas.clientWidth; 
+                canvas.height = canvas.clientHeight;
             }
             const bufferLength = deck.analyser.frequencyBinCount;
             deck.analyser.getByteFrequencyData(deck.dataArray);
             
             ctx.clearRect(0, 0, canvas.width, canvas.height); 
             
-            const barWidth = (canvas.width / bufferLength) * 2.5; let barHeight; let x = 0;
+            const barWidth = (canvas.width / bufferLength) * 2.5; 
+            let barHeight; 
+            let x = 0;
+            
             for (let i = 0; i < bufferLength; i++) {
                 barHeight = (deck.dataArray[i] / 255) * canvas.height * 0.9;
-                
                 if (deckId === 'A') {
                     ctx.fillStyle = `rgba(6, 182, 212, ${Math.max(0.4, (deck.dataArray[i] / 255))})`;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 10; 
                     ctx.shadowColor = "#06b6d4";
                 } else {
                     ctx.fillStyle = `rgba(251, 191, 36, ${Math.max(0.4, (deck.dataArray[i] / 255))})`;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 10; 
                     ctx.shadowColor = "#fbbf24";
                 }
-                
                 ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
                 x += barWidth + 1;
             }
             ctx.shadowBlur = 0;
             deck.animationFrameId = requestAnimationFrame(() => visualize(deckId));
         }
-        
+
         function updateCrossfaderDisplay() {
-            const value = parseFloat(crossfader.value);
+            const crossfaderInput = document.getElementById('crossfader');
+            if(!crossfaderInput) return;
+            const value = parseFloat(crossfaderInput.value);
             let displayValue;
+            
             if (value === 0.5) {
                 displayValue = "CENTER";
             } else if (value < 0.5) {
@@ -540,15 +497,23 @@
             } else {
                 displayValue = "B " + Math.round(((value - 0.5) / 0.5) * 100) + "%";
             }
-            crossfaderValueDisplay.textContent = displayValue;
             
+            const displayEl = document.getElementById('crossfaderValueDisplay');
+            if(displayEl) displayEl.textContent = displayValue;
+
             const percent = value * 100;
-            if (value < 0.5) {
-                 crossfader.style.background = `linear-gradient(to right, #06b6d4 ${100 - percent*2}%, #222 50%, #222)`;
-            } else if (value > 0.5) {
-                 crossfader.style.background = `linear-gradient(to right, #222, #222 50%, #fbbf24 ${percent*2-100}%)`;
-            } else {
-                 crossfader.style.background = `linear-gradient(to right, #06b6d4, #0ea5e9 50%, #fbbf24)`;
+            const leds = document.getElementById('crossfaderLeds');
+            if (leds) {
+                if (value < 0.5) {
+                    leds.style.background = `linear-gradient(to right, rgba(6, 182, 212, 0.8) ${percent}%, rgba(6, 182, 212, 0.2) 50%, transparent 50%)`;
+                    leds.style.boxShadow = `0 0 15px rgba(6, 182, 212, 0.4)`;
+                } else if (value > 0.5) {
+                    leds.style.background = `linear-gradient(to right, transparent 50%, rgba(251, 191, 36, 0.2) 50%, rgba(251, 191, 36, 0.8) ${percent}%)`;
+                    leds.style.boxShadow = `0 0 15px rgba(251, 191, 36, 0.4)`;
+                } else {
+                    leds.style.background = `transparent`;
+                    leds.style.boxShadow = `none`;
+                }
             }
         }
 
@@ -558,203 +523,143 @@
             const crossfaderValue = parseFloat(crossfader.value);
             const deckVolumeValue = parseFloat(deck.volumeSlider.value);
             let calculatedGain;
-
             if (deckId === 'A') {
                 calculatedGain = 1 - crossfaderValue;
             } else {
                 calculatedGain = crossfaderValue;
             }
-            
             deck.gainNode.gain.value = Math.max(0, calculatedGain) * deckVolumeValue;
         }
 
-        function updateDeckTimes(deckId) {
-            const deck = decks[deckId];
-            if (!deck.audio.duration || isNaN(deck.audio.duration)) {
-                deck.progressBar.style.width = '0%'; deck.currentTime.textContent = formatTime(0); deck.remainingTime.textContent = formatTime(0); return;
-            }
-            deck.currentTime.textContent = formatTime(deck.audio.currentTime);
-            const remaining = deck.audio.duration - deck.audio.currentTime;
-            deck.remainingTime.textContent = remaining > 0.05 ? "-" + formatTime(remaining) : formatTime(0);
-            const progressPercent = (deck.audio.currentTime / deck.audio.duration) * 100;
-            deck.progressBar.style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
-        }
-
-        function clearDeck(deckId) {
-            const deck = decks[deckId];
-            if (deck.audio.src) {
-                deck.audio.pause();
-                deck.audio.src = '';
-            }
-            if (deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
-            deck.animationFrameId = null;
-            clearVisualizer(deckId);
-            
-            deck.trackInfo.textContent = 'Pista no cargada';
-            deck.currentTime.textContent = formatTime(0);
-            deck.remainingTime.textContent = formatTime(0);
-            deck.totalTime.textContent = 'Total: 00:00';
-            deck.progressBar.style.width = '0%';
-            deck.volumeDisplay.textContent = 'VOL: 100%';
-            deck.currentTrackName = null;
-            deck.currentTrackIndex = -1;
-            updatePlayPauseButton(deckId, false);
-
-            // Limpiar también el video de YouTube
-            const ytInput = document.getElementById(`ytInput${deckId}`);
-            const ytContainer = document.getElementById(`ytContainer${deckId}`);
-            const ytIframe = document.getElementById(`ytIframe${deckId}`);
-            if(ytInput) ytInput.value = '';
-            if(ytContainer) {
-                ytContainer.classList.add('hidden');
-                ytContainer.classList.remove('flex');
-            }
-            if(ytIframe) ytIframe.src = '';
-        }
-
-        decks.A.clearButton.addEventListener('click', () => clearDeck('A'));
-        decks.B.clearButton.addEventListener('click', () => clearDeck('B'));
-
-        // Procesador universal de archivos
-        function processFiles(files, defaultCategory = 'music') {
-            initAudioContext();
+        function processFiles(filesList, defaultCategory) {
             let filesProcessed = 0;
-            
-            if (files.length > 0) {
-                const pMusic = playlistMusicElement.querySelector('p.text-gray-500');
-                const pRec = playlistRecordingsElement.querySelector('p.text-gray-500');
-                if (pMusic && defaultCategory === 'music') pMusic.remove();
-                if (pRec && defaultCategory === 'recording') pRec.remove();
-            }
+            const pMusic = playlistMusicElement.querySelector('p');
+            if (pMusic && defaultCategory === 'music') pMusic.remove();
+            const pRec = playlistRecordingsElement.querySelector('p');
+            if (pRec && defaultCategory === 'recording') pRec.remove();
 
-            files.forEach(file => {
+            filesList.forEach(file => {
                 const extension = file.name.split('.').pop().toLowerCase();
                 const validExtensions = ['aac', 'wma', 'mp3', 'wav', 'ogg', 'flac', 'm4a', 'mp4', 'webm'];
-                
-                // Aceptamos Audio, Video, y los formatos especificados
                 if (file.type.startsWith('audio/') || file.type.startsWith('video/') || validExtensions.includes(extension)) {
                     const trackUrl = URL.createObjectURL(file);
                     const tempAudio = new Audio(trackUrl);
                     tempAudio.onloadedmetadata = () => {
-                        const track = { 
-                            name: file.name, 
-                            url: trackUrl, 
-                            duration: tempAudio.duration, 
+                        const track = {
+                            name: file.name,
+                            url: trackUrl,
+                            duration: tempAudio.duration,
                             file: file,
                             id: Date.now().toString(36) + Math.random().toString(36).substring(2),
                             category: defaultCategory
                         };
                         playlist.push(track);
                         filesProcessed++;
-                        if (filesProcessed === files.length) { renderPlaylist(); updateTotalPlaylistTime(); }
+                        if (filesProcessed === filesList.length) {
+                            renderPlaylist();
+                            updateTotalPlaylistTime();
+                        }
                     };
                     tempAudio.onerror = () => {
-                        console.error(`Error al cargar metadatos de: ${file.name}`);
                         filesProcessed++;
-                        if (filesProcessed === files.length) { renderPlaylist(); updateTotalPlaylistTime(); }
+                        if (filesProcessed === filesList.length) {
+                            renderPlaylist();
+                            updateTotalPlaylistTime();
+                        }
                     };
                 } else {
-                    console.warn(`Archivo no soportado: ${file.name}`);
                     filesProcessed++;
-                    if (filesProcessed === files.length) { renderPlaylist(); updateTotalPlaylistTime(); }
+                    if (filesProcessed === filesList.length) {
+                        renderPlaylist();
+                        updateTotalPlaylistTime();
+                    }
                 }
             });
         }
 
-        // Eventos para botones separados
-        fileInputMusic.addEventListener('change', (event) => {
-            const files = Array.from(event.target.files);
-            processFiles(files, 'music');
-            fileInputMusic.value = '';
-        });
+        function updateTotalPlaylistTime() {
+            let total = 0;
+            playlist.forEach(t => total += t.duration);
+            totalPlaylistTimeElement.textContent = `TIEMPO TOTAL: ${formatTime(total)}`;
+        }
 
-        fileInputRecordings.addEventListener('change', (event) => {
-            const files = Array.from(event.target.files);
-            processFiles(files, 'recording');
-            fileInputRecordings.value = '';
-        });
-        
-        // Creación del elemento DOM para cada pista
         function createTrackElement(track) {
-            const li = document.createElement('div'); 
+            const li = document.createElement('div');
             li.className = `p-2 rounded mb-1 flex justify-between items-center text-sm transition-all duration-200 cursor-pointer playlist-item`;
             li.draggable = true;
             li.dataset.trackOriginalIndex = playlist.findIndex(pTrack => pTrack.id === track.id);
             li.title = track.name;
-
             const iconClass = track.file.type.startsWith('video/') ? 'fa-video' : 'fa-music';
-
             const trackNameSpan = document.createElement('span');
             trackNameSpan.innerHTML = `<i class="fas ${iconClass} mr-2 text-xs text-gray-500"></i>${track.name}`;
             trackNameSpan.className = 'truncate flex-grow mr-2 font-medium';
             li.appendChild(trackNameSpan);
-            
+
             const controlsDiv = document.createElement('div');
             controlsDiv.className = 'flex items-center';
-
+            
             const durationSpan = document.createElement('span');
             durationSpan.textContent = formatTime(track.duration);
-            durationSpan.className = `text-xs text-gray-500 mr-2 font-mono`; 
+            durationSpan.className = 'text-xs text-gray-500 mr-3 font-mono';
             controlsDiv.appendChild(durationSpan);
 
-            const removeButton = document.createElement('button');
-            removeButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-            removeButton.className = 'text-gray-600 hover:text-red-500 focus:outline-none transition-colors';
-            removeButton.title = 'Quitar';
-            removeButton.onclick = (e) => {
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            removeBtn.className = 'text-gray-500 hover:text-red-500 transition-colors ml-2';
+            removeBtn.onclick = (e) => {
                 e.stopPropagation();
                 removeTrackFromPlaylist(track.id);
             };
-            controlsDiv.appendChild(removeButton);
+            controlsDiv.appendChild(removeBtn);
             li.appendChild(controlsDiv);
 
-            // --- LÓGICA CORREGIDA: DOBLE CLIC PARA CARGAR AL DECK DISPONIBLE ---
-            li.addEventListener('dblclick', (e) => {
-                e.stopPropagation();
+            li.addEventListener('dblclick', () => {
+                let targetDeck = 'A';
                 const originalIndex = li.dataset.trackOriginalIndex;
-                let targetDeck = 'A'; // Deck por defecto
                 
-                // Evaluamos estrictamente cuál Deck está libre
-                if (decks.A.currentTrackIndex === -1) {
-                    targetDeck = 'A'; // Deck A no tiene ninguna pista cargada
-                } else if (decks.B.currentTrackIndex === -1) {
-                    targetDeck = 'B'; // Deck B no tiene ninguna pista cargada
-                } else if (!decks.A.audio.paused && decks.B.audio.paused) {
-                    targetDeck = 'B'; // Deck A está sonando y el B pausado, lo mandamos al B
-                } else if (decks.A.audio.paused && !decks.B.audio.paused) {
-                    targetDeck = 'A'; // Deck B está sonando y el A pausado, lo mandamos al A
+                const deckAVacio = (decks.A.currentTrackIndex === -1);
+                const deckBVacio = (decks.B.currentTrackIndex === -1);
+                const deckAPausado = decks.A.audio.paused;
+                const deckBPausado = decks.B.audio.paused;
+
+                if (deckAVacio) {
+                    targetDeck = 'A';
+                } else if (deckBVacio) {
+                    targetDeck = 'B';
+                } else if (deckAPausado && !deckBPausado) {
+                    targetDeck = 'A';
+                } else if (!deckAPausado && deckBPausado) {
+                    targetDeck = 'B';
                 } else {
-                    targetDeck = 'A'; // Si ambos están pausados o ambos sonando, por defecto sobreescribe el A
+                    targetDeck = 'A';
                 }
                 
                 loadTrackToDeck(targetDeck, parseInt(originalIndex, 10));
             });
 
-            li.addEventListener('dragstart', (event) => { 
-                event.dataTransfer.setData('text/plain', event.currentTarget.dataset.trackOriginalIndex); 
-                event.currentTarget.style.opacity = '0.5'; 
+            li.addEventListener('dragstart', (event) => {
+                event.dataTransfer.setData('text/plain', event.currentTarget.dataset.trackOriginalIndex);
+                event.currentTarget.style.opacity = '0.5';
                 event.dataTransfer.effectAllowed = 'copyMove';
             });
-            li.addEventListener('dragend', (event) => { event.currentTarget.style.opacity = '1'; });
+            li.addEventListener('dragend', (event) => {
+                event.currentTarget.style.opacity = '1';
+            });
 
             return li;
         }
 
-        // Renderizado general de ambas listas
         function renderPlaylist() {
             const searchMusic = searchMusicInput.value.toLowerCase();
             const searchRecording = searchRecordingsInput.value.toLowerCase();
-
             playlistMusicElement.innerHTML = '';
             playlistRecordingsElement.innerHTML = '';
-
+            
             const musicTracks = playlist.filter(t => t.category === 'music');
             const recordingTracks = playlist.filter(t => t.category === 'recording');
-
             const filteredMusic = musicTracks.filter(track => track.name.toLowerCase().includes(searchMusic));
             const filteredRecordings = recordingTracks.filter(track => track.name.toLowerCase().includes(searchRecording));
 
-            // Llenar Temas Musicales
             if (filteredMusic.length === 0) {
                 const msg = searchMusic ? 'Sin resultados.' : 'Añade música aquí.';
                 playlistMusicElement.innerHTML = `<p class="text-gray-500 text-xs text-center italic mt-2">${msg}</p>`;
@@ -764,7 +669,6 @@
                 });
             }
 
-            // Llenar Grabaciones
             if (filteredRecordings.length === 0) {
                 const msg = searchRecording ? 'Sin resultados.' : 'Añade grabaciones aquí.';
                 playlistRecordingsElement.innerHTML = `<p class="text-gray-500 text-xs text-center italic mt-2">${msg}</p>`;
@@ -785,76 +689,50 @@
             renderAutoPlayQueue();
         }
 
-        clearPlaylistButton.addEventListener('click', () => {
-            confirmationModal.classList.remove('hidden');
-        });
-
-        confirmClearPlaylistButton.addEventListener('click', () => {
-            clearMainPlaylist();
-            confirmationModal.classList.add('hidden');
-        });
-
-        cancelClearPlaylistButton.addEventListener('click', () => {
-            confirmationModal.classList.add('hidden');
-        });
-
         function removeTrackFromPlaylist(trackId) {
             playlist = playlist.filter(track => track.id !== trackId);
             autoPlayQueue = autoPlayQueue.filter(track => track.id !== trackId);
             renderPlaylist();
-            renderAutoPlayQueue(); 
+            renderAutoPlayQueue();
             updateTotalPlaylistTime();
             Object.keys(decks).forEach(deckId => {
                 const deck = decks[deckId];
                 if (deck.currentTrackIndex !== -1 && playlist[deck.currentTrackIndex]?.id === trackId) {
-                    resetDeck(deckId); 
+                    clearDeck(deckId);
                 }
             });
         }
-        
-        function resetDeck(deckId) {
+
+        function clearDeck(deckId) {
             const deck = decks[deckId];
-            if (deck.audio.src) {
-                deck.audio.pause();
-                deck.audio.src = '';
-            }
-            if (deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
-            deck.animationFrameId = null;
-            clearVisualizer(deckId);
-            
-            deck.trackInfo.textContent = 'Pista no cargada';
-            deck.currentTime.textContent = formatTime(0);
-            deck.remainingTime.textContent = formatTime(0);
-            deck.totalTime.textContent = 'Total: 00:00';
-            deck.progressBar.style.width = '0%';
-            deck.volumeDisplay.textContent = 'VOL: 100%';
-            deck.currentTrackName = null;
+            deck.audio.pause();
+            deck.audio.src = '';
             deck.currentTrackIndex = -1;
+            deck.currentTrackName = null;
+            deck.trackInfo.textContent = 'Pista no cargada';
+            deck.currentTime.textContent = '00:00';
+            deck.totalTime.textContent = 'Total: 00:00';
+            deck.remainingTime.textContent = '00:00';
+            deck.progressBar.style.width = '0%';
             updatePlayPauseButton(deckId, false);
+            if(deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
+            clearVisualizer(deckId);
         }
 
-        function updateTotalPlaylistTime() {
-            const totalSeconds = playlist.reduce((sum, track) => sum + (track.duration || 0), 0);
-            totalPlaylistTimeElement.textContent = `TIEMPO TOTAL: ${formatTime(totalSeconds)}`;
-        }
-
-        function loadTrackToDeck(deckId, trackOriginalIndex, isAutoplay = false) {
+        function loadTrackToDeck(deckId, trackOriginalIndex, isAutoPlay = false) {
             if (!audioContext) initAudioContext();
             if (trackOriginalIndex < 0 || trackOriginalIndex >= playlist.length) return;
-
             const deck = decks[deckId];
             const track = playlist[trackOriginalIndex];
             deck.currentTrackIndex = trackOriginalIndex;
             deck.currentTrackName = track.name;
-
             if (deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
             if (deck.audio.src) deck.audio.pause();
-            
             deck.audio.src = track.url;
             deck.trackInfo.textContent = track.name;
             deck.progressBar.style.width = '0%';
             deck.volumeDisplay.textContent = `VOL: ${Math.round(deck.volumeSlider.value * 100)}%`;
-
+            
             if (!deck.sourceNode || deck.sourceNode.mediaElement !== deck.audio) {
                 if (deck.sourceNode) deck.sourceNode.disconnect();
                 deck.sourceNode = audioContext.createMediaElementSource(deck.audio);
@@ -865,7 +743,7 @@
                 deck.gainNode.connect(audioContext.destination);
             }
             deck.dataArray = new Uint8Array(deck.analyser.frequencyBinCount);
-
+            
             deck.audio.onloadedmetadata = () => {
                 deck.totalTime.textContent = `Total: ${formatTime(deck.audio.duration)}`;
                 const remaining = deck.audio.duration;
@@ -875,29 +753,46 @@
                 applyCrossfaderAndVolume(deckId);
                 updatePlayPauseButton(deckId, false);
             };
-
             deck.audio.ontimeupdate = () => updateDeckTimes(deckId);
-
+            
+            // LÓGICA DE COLA AUTOMÁTICA Y MOVIMIENTO DE CROSSFADER
             deck.audio.onended = () => {
                 updatePlayPauseButton(deckId, false);
                 deck.currentTime.textContent = formatTime(deck.audio.duration);
                 deck.remainingTime.textContent = formatTime(0);
                 deck.progressBar.style.width = '100%';
-                if (deck.animationFrameId) { cancelAnimationFrame(deck.animationFrameId); deck.animationFrameId = null; clearVisualizer(deckId); }
-                
+                if (deck.animationFrameId) {
+                    cancelAnimationFrame(deck.animationFrameId);
+                    deck.animationFrameId = null;
+                    clearVisualizer(deckId);
+                }
                 if (autoPlayQueue.length > 0) {
-                    const nextTrackInQueue = autoPlayQueue.shift(); 
-                    renderAutoPlayQueue(); 
+                    const nextTrackInQueue = autoPlayQueue.shift();
+                    renderAutoPlayQueue();
                     const otherDeckId = (deckId === 'A' ? 'B' : 'A');
-                    loadTrackToDeck(otherDeckId, playlist.findIndex(p => p.id === nextTrackInQueue.id), true); 
+                    loadTrackToDeck(otherDeckId, playlist.findIndex(p => p.id === nextTrackInQueue.id), true);
+                    
                     decks[otherDeckId].audio.play().then(() => {
                         updatePlayPauseButton(otherDeckId, true);
+                        
+                        // --- AQUÍ ESTÁ EL AJUSTE PARA MOVER EL CROSSFADER ---
+                        const crossfaderInput = document.getElementById('crossfader');
+                        if (crossfaderInput) {
+                            // Si salta al Deck A, pone el crossfader en 0. Si va al B, lo pone en 1.
+                            crossfaderInput.value = (otherDeckId === 'A') ? 0 : 1;
+                            applyCrossfaderAndVolume('A');
+                            applyCrossfaderAndVolume('B');
+                            updateCrossfaderDisplay();
+                        }
+                        // ----------------------------------------------------
+
                     }).catch(e => console.error("Error autoplay:", e));
-                    autoPlayCurrentDeckId = otherDeckId; 
+                    autoPlayCurrentDeckId = otherDeckId;
                 } else {
-                    autoPlayCurrentDeckId = null; 
+                    autoPlayCurrentDeckId = null;
                 }
             };
+
             deck.audio.onplay = () => {
                 updatePlayPauseButton(deckId, true);
                 if (audioContext.state === 'suspended') audioContext.resume();
@@ -905,99 +800,143 @@
             };
             deck.audio.onpause = () => {
                 updatePlayPauseButton(deckId, false);
-                if (deck.animationFrameId) { cancelAnimationFrame(deck.animationFrameId); deck.animationFrameId = null; }
+                if (deck.animationFrameId) {
+                    cancelAnimationFrame(deck.animationFrameId);
+                    deck.animationFrameId = null;
+                }
             };
-
             deck.progressBarContainer.onclick = (event) => {
                 if (!deck.audio.duration) return;
                 const rect = deck.progressBarContainer.getBoundingClientRect();
                 const clickX = event.clientX - rect.left;
-                const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-                deck.audio.currentTime = deck.audio.duration * percentage;
-                updateDeckTimes(deckId);
+                const percent = clickX / rect.width;
+                deck.audio.currentTime = percent * deck.audio.duration;
             };
+        }
 
-            if (isAutoplay) {
-                crossfader.value = 0.5; 
-                applyCrossfaderAndVolume('A');
-                applyCrossfaderAndVolume('B');
-                updateCrossfaderDisplay();
+        function updateDeckTimes(deckId) {
+            const deck = decks[deckId];
+            if (deck.audio.duration) {
+                deck.currentTime.textContent = formatTime(deck.audio.currentTime);
+                const remaining = deck.audio.duration - deck.audio.currentTime;
+                deck.remainingTime.textContent = remaining > 0.1 ? "-" + formatTime(remaining) : formatTime(0);
+                const progressPercent = (deck.audio.currentTime / deck.audio.duration) * 100;
+                deck.progressBar.style.width = `${progressPercent}%`;
             }
         }
-        
-        Object.keys(decks).forEach(deckId => {
-            const deckElement = decks[deckId].dropZone;
-            deckElement.addEventListener('dragover', (event) => { event.preventDefault(); deckElement.classList.add('drop-zone-active'); });
-            deckElement.addEventListener('dragleave', () => { deckElement.classList.remove('drop-zone-active'); });
-            deckElement.addEventListener('drop', (event) => {
-                event.preventDefault();
-                deckElement.classList.remove('drop-zone-active');
-                const draggedIndexStr = event.dataTransfer.getData('text/plain');
-                const trackOriginalIndex = parseInt(draggedIndexStr, 10);
-                if (!isNaN(trackOriginalIndex)) {
-                    loadTrackToDeck(deckId, trackOriginalIndex); 
-                    if (autoPlayCurrentDeckId) {
-                        autoPlayCurrentDeckId = null; 
-                    }
-                }
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            const hoursStr = hours.toString().padStart(2, '0');
+            const minutesStr = now.getMinutes().toString().padStart(2, '0');
+            const secondsStr = now.getSeconds().toString().padStart(2, '0');
+            const clockEl = document.getElementById('clockDeckB');
+            if(clockEl) {
+                clockEl.textContent = `${hoursStr}:${minutesStr}:${secondsStr} ${ampm}`;
+            }
+        }
+
+        function renderAutoPlayQueue() {
+            autoPlayQueueElement.innerHTML = '';
+            if (autoPlayQueue.length === 0) {
+                autoPlayQueueElement.innerHTML = '<p class="text-gray-600 text-xs text-center italic mt-2">Arrastra pistas aquí.</p>';
+                return;
+            }
+            autoPlayQueue.forEach((track, index) => {
+                const li = document.createElement('div');
+                li.className = 'p-2 rounded mb-1 flex justify-between items-center text-sm transition-all duration-200 cursor-grab auto-play-queue-item bg-gray-800 border border-gray-700 hover:border-yellow-500';
+                li.draggable = true;
+                li.dataset.autoPlayIndex = index;
+                const trackNameSpan = document.createElement('span');
+                trackNameSpan.textContent = track.name;
+                trackNameSpan.className = 'truncate flex-grow mr-2 text-gray-300';
+                li.appendChild(trackNameSpan);
+                const controlsDiv = document.createElement('div');
+                controlsDiv.className = 'flex items-center space-x-2';
+                
+                const moveUpButton = document.createElement('button');
+                moveUpButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
+                moveUpButton.className = 'text-gray-500 hover:text-cyan-400 focus:outline-none transition-colors';
+                moveUpButton.onclick = (e) => { e.stopPropagation(); moveTrackInAutoPlayQueue(index, -1); };
+                if (index === 0) { moveUpButton.disabled = true; moveUpButton.classList.add('opacity-30', 'cursor-not-allowed'); }
+                controlsDiv.appendChild(moveUpButton);
+
+                const moveDownButton = document.createElement('button');
+                moveDownButton.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                moveDownButton.className = 'text-gray-500 hover:text-cyan-400 focus:outline-none transition-colors';
+                moveDownButton.onclick = (e) => { e.stopPropagation(); moveTrackInAutoPlayQueue(index, 1); };
+                if (index === autoPlayQueue.length - 1) { moveDownButton.disabled = true; moveDownButton.classList.add('opacity-30', 'cursor-not-allowed'); }
+                controlsDiv.appendChild(moveDownButton);
+
+                const removeButton = document.createElement('button');
+                removeButton.innerHTML = '<i class="fas fa-times"></i>';
+                removeButton.className = 'text-gray-500 hover:text-red-500 focus:outline-none transition-colors ml-2';
+                removeButton.onclick = (e) => { e.stopPropagation(); autoPlayQueue.splice(index, 1); renderAutoPlayQueue(); };
+                controlsDiv.appendChild(removeButton);
+
+                li.appendChild(controlsDiv);
+                autoPlayQueueElement.appendChild(li);
             });
+        }
 
-            decks[deckId].volumeSlider.addEventListener('input', () => {
-                decks[deckId].volumeDisplay.textContent = `VOL: ${Math.round(decks[deckId].volumeSlider.value * 100)}%`;
-                applyCrossfaderAndVolume(deckId);
-            });
+        function moveTrackInAutoPlayQueue(index, direction) {
+            if (index + direction >= 0 && index + direction < autoPlayQueue.length) {
+                const temp = autoPlayQueue[index];
+                autoPlayQueue[index] = autoPlayQueue[index + direction];
+                autoPlayQueue[index + direction] = temp;
+                renderAutoPlayQueue();
+            }
+        }
+
+        // --- Event Listeners Iniciales ---
+        fileInputMusic.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files);
+            processFiles(files, 'music');
+            fileInputMusic.value = '';
         });
 
-        // Eventos para arrastrar y soltar en Music
-        playlistMusicElement.addEventListener('dragover', (e) => { e.preventDefault(); playlistMusicElement.classList.add('drop-zone-active'); });
-        playlistMusicElement.addEventListener('dragleave', () => { playlistMusicElement.classList.remove('drop-zone-active'); });
-        playlistMusicElement.addEventListener('drop', (e) => {
-            e.preventDefault();
-            playlistMusicElement.classList.remove('drop-zone-active');
-            if (e.dataTransfer.files.length > 0) processFiles(Array.from(e.dataTransfer.files), 'music');
+        fileInputRecordings.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files);
+            processFiles(files, 'recording');
+            fileInputRecordings.value = '';
         });
 
-        // Eventos para arrastrar y soltar en Grabaciones
-        playlistRecordingsElement.addEventListener('dragover', (e) => { e.preventDefault(); playlistRecordingsElement.classList.add('drop-zone-active'); });
-        playlistRecordingsElement.addEventListener('dragleave', () => { playlistRecordingsElement.classList.remove('drop-zone-active'); });
-        playlistRecordingsElement.addEventListener('drop', (e) => {
-            e.preventDefault();
-            playlistRecordingsElement.classList.remove('drop-zone-active');
-            if (e.dataTransfer.files.length > 0) processFiles(Array.from(e.dataTransfer.files), 'recording');
-        });
-
-        // Buscador de Música
         searchMusicInput.addEventListener('input', () => {
             clearSearchMusicBtn.classList.toggle('hidden', searchMusicInput.value.length === 0);
-            renderPlaylist(); 
+            renderPlaylist();
         });
         clearSearchMusicBtn.addEventListener('click', () => {
             searchMusicInput.value = '';
             clearSearchMusicBtn.classList.add('hidden');
-            renderPlaylist(); 
+            renderPlaylist();
         });
 
-        // Buscador de Grabaciones
         searchRecordingsInput.addEventListener('input', () => {
             clearSearchRecordingsBtn.classList.toggle('hidden', searchRecordingsInput.value.length === 0);
-            renderPlaylist(); 
+            renderPlaylist();
         });
         clearSearchRecordingsBtn.addEventListener('click', () => {
             searchRecordingsInput.value = '';
             clearSearchRecordingsBtn.classList.add('hidden');
-            renderPlaylist(); 
+            renderPlaylist();
         });
 
-        // Drop general para toda la pantalla (por defecto va a música)
-        document.body.addEventListener('dragover', (event) => { event.preventDefault(); });
-        document.body.addEventListener('drop', (event) => {
-            event.preventDefault();
-            // Evitamos duplicar si lo soltaron en una de las cajas de playlist
-            if(!event.target.closest('#playlistMusic') && !event.target.closest('#playlistRecordings')){
-                if (event.dataTransfer.files.length > 0) processFiles(Array.from(event.dataTransfer.files), 'music');
-            }
+        clearPlaylistButton.addEventListener('click', () => {
+            confirmationModal.classList.remove('hidden');
         });
-        
+        confirmClearPlaylistButton.addEventListener('click', () => {
+            clearMainPlaylist();
+            confirmationModal.classList.add('hidden');
+        });
+        cancelClearPlaylistButton.addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+        });
+
+        // Eventos Decks
         ['A', 'B'].forEach(deckId => {
             const deck = decks[deckId];
             deck.playPauseButton.addEventListener('click', () => {
@@ -1008,237 +947,100 @@
                 }
             });
             deck.stopButton.addEventListener('click', () => {
-                 if (deck.audio.src) {
-                    deck.audio.pause(); deck.audio.currentTime = 0;
-                    updateDeckTimes(deckId); updatePlayPauseButton(deckId, false);
-                    if (deck.animationFrameId) { cancelAnimationFrame(deck.animationFrameId); deck.animationFrameId = null; }
-                 }
-                 if (autoPlayCurrentDeckId === deckId) {
-                    autoPlayCurrentDeckId = null;
-                 }
+                if (deck.audio.src) {
+                    deck.audio.pause();
+                    deck.audio.currentTime = 0;
+                    updateDeckTimes(deckId);
+                    updatePlayPauseButton(deckId, false);
+                    if (deck.animationFrameId) {
+                        cancelAnimationFrame(deck.animationFrameId);
+                        deck.animationFrameId = null;
+                    }
+                }
+                if (autoPlayCurrentDeckId === deckId) autoPlayCurrentDeckId = null;
             });
             deck.volumeSlider.addEventListener('input', () => {
-                decks[deckId].volumeDisplay.textContent = `VOL: ${Math.round(decks[deckId].volumeSlider.value * 100)}%`;
+                deck.volumeDisplay.textContent = `VOL: ${Math.round(deck.volumeSlider.value * 100)}%`;
                 applyCrossfaderAndVolume(deckId);
             });
-            if (deck.audio.paused || !deck.audio.src) {
-                if(deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
-                deck.animationFrameId = null;
-                clearVisualizer(deckId);
-            }
+            deck.clearButton.addEventListener('click', () => {
+                clearDeck(deckId);
+            });
         });
-        
+
         crossfader.addEventListener('input', () => {
             applyCrossfaderAndVolume('A');
             applyCrossfaderAndVolume('B');
             updateCrossfaderDisplay();
-            crossfader.classList.add('crossfader-glow');
         });
 
-        crossfader.addEventListener('mouseup', () => {
-            crossfader.classList.remove('crossfader-glow');
-        });
-
-        crossfader.addEventListener('touchend', () => {
-            crossfader.classList.remove('crossfader-glow');
-        });
-        
-        function updateClock() {
-            const now = new Date();
-            const colombiaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Bogota"}));
-            
-            let hours = colombiaTime.getHours();
-            const minutes = colombiaTime.getMinutes().toString().padStart(2, '0');
-            const seconds = colombiaTime.getSeconds().toString().padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12;
-            const formattedHours = hours.toString().padStart(2, '0');
-
-            clockDeckB.textContent = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
-        }
-
-        // --- Funcionalidad de Cola de Reproducción Automática ---
-        function renderAutoPlayQueue() {
-            autoPlayQueueElement.innerHTML = '';
-            if (autoPlayQueue.length === 0) {
-                autoPlayQueueElement.innerHTML = `<p class="text-gray-500 text-xs text-center italic mt-2">Arrastra pistas aquí.</p>`; 
-                return;
+        // Drag and Drop (General para toda la página, excepto las cajas específicas)
+        document.body.addEventListener('dragover', (event) => { event.preventDefault(); });
+        document.body.addEventListener('drop', (event) => { 
+            event.preventDefault(); 
+            if(!event.target.closest('.drop-zone')){
+                if (event.dataTransfer.files.length > 0) processFiles(Array.from(event.dataTransfer.files), 'music');
             }
+        });
 
-            autoPlayQueue.forEach((track, index) => {
-                const li = document.createElement('div');
-                li.className = `auto-play-queue-item bg-[#181a20] hover:bg-[#23262e] p-2 mb-1 rounded flex justify-between items-center text-xs transition-colors border border-gray-800`;
-                li.draggable = true;
-                li.dataset.autoPlayIndex = index;
-                li.title = track.name;
+        // Drag and Drop Específico para subir archivos a "Temas Musicales"
+        playlistMusicElement.addEventListener('dragover', (e) => { 
+            e.preventDefault(); 
+            if(e.dataTransfer.types.includes('Files')) playlistMusicElement.classList.add('drop-zone-active'); 
+        });
+        playlistMusicElement.addEventListener('dragleave', () => { playlistMusicElement.classList.remove('drop-zone-active'); });
+        playlistMusicElement.addEventListener('drop', (e) => {
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                e.preventDefault();
+                playlistMusicElement.classList.remove('drop-zone-active');
+                processFiles(Array.from(e.dataTransfer.files), 'music');
+            }
+        });
 
-                const trackNameSpan = document.createElement('span');
-                trackNameSpan.textContent = track.name;
-                trackNameSpan.className = 'truncate flex-grow mr-2';
-                li.appendChild(trackNameSpan);
+        // Drag and Drop Específico para subir archivos a "Grabaciones"
+        playlistRecordingsElement.addEventListener('dragover', (e) => { 
+            e.preventDefault(); 
+            if(e.dataTransfer.types.includes('Files')) playlistRecordingsElement.classList.add('drop-zone-active'); 
+        });
+        playlistRecordingsElement.addEventListener('dragleave', () => { playlistRecordingsElement.classList.remove('drop-zone-active'); });
+        playlistRecordingsElement.addEventListener('drop', (e) => {
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                e.preventDefault();
+                playlistRecordingsElement.classList.remove('drop-zone-active');
+                processFiles(Array.from(e.dataTransfer.files), 'recording');
+            }
+        });
 
-                const controlsDiv = document.createElement('div');
-                controlsDiv.className = 'flex items-center';
-
-                const moveUpButton = document.createElement('button');
-                moveUpButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
-                moveUpButton.className = 'move-btn text-gray-500 hover:text-cyan-400 focus:outline-none mr-2 transition-colors';
-                moveUpButton.title = 'Mover arriba';
-                moveUpButton.onclick = (e) => {
-                    e.stopPropagation();
-                    moveTrackInAutoPlayQueue(index, -1); 
-                };
-                if (index === 0) {
-                    moveUpButton.disabled = true;
-                    moveUpButton.classList.add('opacity-30', 'cursor-not-allowed');
-                }
-                controlsDiv.appendChild(moveUpButton);
-
-                const moveDownButton = document.createElement('button');
-                moveDownButton.innerHTML = '<i class="fas fa-chevron-down"></i>';
-                moveDownButton.className = 'move-btn text-gray-500 hover:text-cyan-400 focus:outline-none mr-2 transition-colors';
-                moveDownButton.title = 'Mover abajo';
-                moveDownButton.onclick = (e) => {
-                    e.stopPropagation();
-                    moveTrackInAutoPlayQueue(index, 1); 
-                };
-                if (index === autoPlayQueue.length - 1) {
-                    moveDownButton.disabled = true;
-                    moveDownButton.classList.add('opacity-30', 'cursor-not-allowed');
-                }
-                controlsDiv.appendChild(moveDownButton);
-
-                const removeButton = document.createElement('button');
-                removeButton.innerHTML = '<i class="fas fa-times"></i>';
-                removeButton.className = 'remove-btn text-gray-600 hover:text-red-500 focus:outline-none transition-colors';
-                removeButton.title = 'Quitar';
-                removeButton.onclick = (e) => {
-                    e.stopPropagation();
-                    removeTrackFromAutoPlayQueue(index);
-                };
-                controlsDiv.appendChild(removeButton);
-                li.appendChild(controlsDiv);
-                autoPlayQueueElement.appendChild(li);
+        // Drag and Drop (Para los Decks)
+        ['A', 'B'].forEach(deckId => {
+            const dropZone = decks[deckId].dropZone;
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drop-zone-active'); });
+            dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('drop-zone-active'); });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drop-zone-active');
+                const trackIndex = e.dataTransfer.getData('text/plain');
+                if (trackIndex) loadTrackToDeck(deckId, parseInt(trackIndex, 10));
             });
-        }
-
-        function removeTrackFromAutoPlayQueue(index) {
-            autoPlayQueue.splice(index, 1);
-            renderAutoPlayQueue();
-        }
-
-        function moveTrackInAutoPlayQueue(currentIndex, direction) {
-            const newIndex = currentIndex + direction;
-            if (newIndex >= 0 && newIndex >= 0 && newIndex < autoPlayQueue.length) { 
-                const [movedTrack] = autoPlayQueue.splice(currentIndex, 1);
-                autoPlayQueue.splice(newIndex, 0, movedTrack);
-                renderAutoPlayQueue(); 
-            }
-        }
-
-        autoPlayQueueElement.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            autoPlayQueueElement.classList.add('drop-zone-active');
         });
 
-        autoPlayQueueElement.addEventListener('dragleave', () => {
+        // Drag and Drop (Para la Cola Automática)
+        autoPlayQueueElement.addEventListener('dragover', (e) => { e.preventDefault(); autoPlayQueueElement.classList.add('drop-zone-active'); });
+        autoPlayQueueElement.addEventListener('dragleave', () => { autoPlayQueueElement.classList.remove('drop-zone-active'); });
+        autoPlayQueueElement.addEventListener('drop', (e) => {
+            e.preventDefault();
             autoPlayQueueElement.classList.remove('drop-zone-active');
-        });
-
-        autoPlayQueueElement.addEventListener('drop', (event) => {
-            event.preventDefault();
-            autoPlayQueueElement.classList.remove('drop-zone-active');
-
-            const draggedIndexStr = event.dataTransfer.getData('text/plain');
-            const draggedOriginalIndex = parseInt(draggedIndexStr, 10);
-
-            if (!isNaN(draggedOriginalIndex) && draggedOriginalIndex >= 0 && draggedOriginalIndex < playlist.length) {
-                const trackToAdd = playlist[draggedOriginalIndex];
-                if (!autoPlayQueue.some(t => t.id === trackToAdd.id)) {
-                    autoPlayQueue.push(trackToAdd);
+            const trackIndex = e.dataTransfer.getData('text/plain');
+            if (trackIndex) {
+                const track = playlist[parseInt(trackIndex, 10)];
+                if (track) {
+                    autoPlayQueue.push(track);
                     renderAutoPlayQueue();
-                } else {
-                    console.warn("La pista ya está en la Cola de Reproducción Automática.");
-                }
-            } else {
-                const draggedElement = document.querySelector('.dragging'); 
-                if (draggedElement && draggedElement.closest('#autoPlayQueue')) {
-                    const draggedAutoPlayIndex = parseInt(draggedElement.dataset.autoPlayIndex, 10);
-                    const targetElement = event.target.closest('.auto-play-queue-item');
-                    
-                    if (targetElement && draggedElement !== targetElement) {
-                        const targetAutoPlayIndex = parseInt(targetElement.dataset.autoPlayIndex, 10);
-                        const [removed] = autoPlayQueue.splice(draggedAutoPlayIndex, 1);
-                        autoPlayQueue.splice(targetAutoPlayIndex, 0, removed);
-                        renderAutoPlayQueue();
-                    } else if (!targetElement) {
-                        renderAutoPlayQueue();
-                    }
                 }
             }
         });
 
-        autoPlayQueueElement.addEventListener('dragstart', (event) => {
-            if (event.target.closest('.auto-play-queue-item')) {
-                const item = event.target.closest('.auto-play-queue-item');
-                item.classList.add('dragging');
-                event.dataTransfer.setData('text/plain', item.dataset.autoPlayIndex); 
-                event.dataTransfer.effectAllowed = 'move';
-            }
-        });
-
-        autoPlayQueueElement.addEventListener('dragend', (event) => {
-            const item = event.target.closest('.auto-play-queue-item');
-            if(item) item.classList.remove('dragging');
-        });
-
-        // --- FUNCIONES PARA YOUTUBE (CORREGIDAS) ---
-        function extractYouTubeID(url) {
-            const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
-
-        function setupYouTubePlayer(deckId, inputId, btnId, containerId, iframeId) {
-            const input = document.getElementById(inputId);
-            const btn = document.getElementById(btnId);
-            const container = document.getElementById(containerId);
-            const iframe = document.getElementById(iframeId);
-
-            btn.addEventListener('click', () => {
-                const url = input.value.trim();
-                if (!url) {
-                    container.classList.add('hidden');
-                    container.classList.remove('flex');
-                    iframe.src = '';
-                    return;
-                }
-                
-                const videoId = extractYouTubeID(url);
-                if (videoId) {
-                    const currentOrigin = (window.location.origin && window.location.origin !== "null") 
-                        ? window.location.origin 
-                        : "https://www.youtube.com";
-                    
-                    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&enablejsapi=1&origin=${currentOrigin}`;
-                    
-                    container.classList.remove('hidden');
-                    container.classList.add('flex');
-                } else {
-                    alert('Por favor, ingresa un enlace de YouTube válido.');
-                    container.classList.add('hidden');
-                    container.classList.remove('flex');
-                    iframe.src = '';
-                }
-            });
-        }
-
-        // Inicializamos los reproductores de YouTube
-        setupYouTubePlayer('A', 'ytInputA', 'ytBtnA', 'ytContainerA', 'ytIframeA');
-        setupYouTubePlayer('B', 'ytInputB', 'ytBtnB', 'ytContainerB', 'ytIframeB');
-
-
+        // Iniciar todo
         window.addEventListener('load', () => {
             clearVisualizer('A'); clearVisualizer('B');
             renderPlaylist();
