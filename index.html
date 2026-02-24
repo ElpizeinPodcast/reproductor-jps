@@ -88,6 +88,7 @@
 
         .glow-text-blue { text-shadow: 0 0 15px rgba(6, 182, 212, 0.9); }
         .glow-text-yellow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.9); }
+        .glow-text-white { text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
 
         .btn-active-blue {
             color: var(--neon-blue);
@@ -99,6 +100,13 @@
             color: var(--neon-yellow);
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.4), inset 2px 2px 5px var(--shadow-dark);
             border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .btn-active-green {
+            color: #22c55e !important;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6), inset 2px 2px 5px var(--shadow-dark) !important;
+            border: 1px solid #22c55e !important;
         }
 
         /* --- CROSSFADER DJ ESTILOS --- */
@@ -154,10 +162,12 @@
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden select-none">
     
-    <div class="fixed top-4 right-6 z-50 bg-[#1f2229] bg-opacity-80 px-3 py-1 rounded-lg border border-gray-700 shadow-lg backdrop-blur-sm">
+    <div class="fixed top-4 right-6 z-50 bg-[#1f2229] bg-opacity-90 px-4 py-2 rounded-lg border border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.8)] backdrop-blur-md flex flex-col items-center">
         <div id="clockDeckB" class="text-xl font-mono text-yellow-400 glow-text-yellow" style="font-family: 'Share Tech Mono', monospace;">
             00:00:00 AM
         </div>
+        <div class="w-full border-t border-gray-500 my-1 opacity-50"></div>
+        <span class="text-xs font-bold text-white glow-text-white tracking-[0.3em] mt-1">RADIO CEB</span>
     </div>
 
     <div class="metallic-background"></div>
@@ -232,24 +242,31 @@
     <main class="flex-grow flex flex-col p-2 md:p-4 z-10">
         
         <section class="neu-panel p-4 mb-4 flex flex-col items-center justify-center relative bg-opacity-90">
-            <label for="crossfader" class="block text-sm font-bold tracking-[0.2em] text-gray-300 mb-3 text-cyan-400 glow-text-blue">CROSSFADER DJ</label>
+            <div class="flex items-center justify-center w-full max-w-2xl px-4 mb-3 space-x-4">
+                <label for="crossfader" class="block text-sm font-bold tracking-[0.2em] text-cyan-400 glow-text-blue mb-0">CROSSFADER DJ</label>
+                
+                <button id="immediateMixBtn" class="neu-btn px-5 py-2 text-[10px] sm:text-xs font-bold tracking-widest text-gray-400 hover:text-gray-200 transition-all duration-300 flex items-center shadow-md focus:outline-none rounded-full border border-gray-700">
+                    <i class="fas fa-forward-step mr-2"></i>
+                    ACTIVAR MEZCLA
+                </button>
+            </div>
             <div class="w-full max-w-2xl relative px-4">
                 <div id="crossfaderTrack" class="relative w-full h-12 bg-[#0a0a0c] rounded-lg border border-[#222] shadow-[inset_0_5px_15px_rgba(0,0,0,1)] flex items-center overflow-hidden">
                     <div class="absolute inset-0 flex justify-between items-center px-4 pointer-events-none z-0 opacity-50">
                         <div class="w-0.5 h-3 bg-gray-500"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div>
                         <div class="w-0.5 h-6 bg-white shadow-[0_0_5px_#fff]"></div>
                         <div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-600"></div><div class="w-0.5 h-3 bg-gray-500"></div>
-                    </div>
-                    <div id="crossfaderLeds" class="absolute inset-0 z-0 transition-all duration-100 ease-in-out"></div>
-                    <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" class="w-full cursor-pointer z-10 m-0 relative">
                 </div>
-                <div class="flex justify-center mt-3">
-                    <span id="crossfaderValueDisplay" class="font-mono text-yellow-400 text-lg font-bold bg-[#131419] px-4 py-1 rounded-md border border-gray-700 shadow-inner">CENTER</span>
-                </div>
+                <div id="crossfaderLeds" class="absolute inset-0 z-0 transition-all duration-100 ease-in-out"></div>
+                <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" class="w-full cursor-pointer z-10 m-0 relative">
             </div>
-        </section>
+            <div class="flex justify-center mt-3">
+                <span id="crossfaderValueDisplay" class="font-mono text-yellow-400 text-lg font-bold bg-[#131419] px-4 py-1 rounded-md border border-gray-700 shadow-inner">CENTER</span>
+            </div>
+        </div>
+    </section>
 
-        <section class="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <section class="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div id="deckA" class="neu-panel deck-glow-blue p-4 flex flex-col drop-zone relative">
                 <div class="flex justify-between items-start mb-2">
                     <h3 class="text-2xl font-bold text-cyan-400 glow-text-blue">DECK A</h3>
@@ -360,6 +377,8 @@
         const confirmationModal = document.getElementById('confirmationModal');
         const confirmClearPlaylistButton = document.getElementById('confirmClearPlaylist');
         const cancelClearPlaylistButton = document.getElementById('cancelClearPlaylist');
+        
+        const immediateMixBtn = document.getElementById('immediateMixBtn');
 
         const decks = {
             A: {
@@ -378,6 +397,7 @@
                 dropZone: document.getElementById('deckA'),
                 clearButton: document.getElementById('clearDeckA'),
                 currentTrackName: null,
+                crossfadeTriggered: false,
                 analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1
             },
             B: {
@@ -396,6 +416,7 @@
                 dropZone: document.getElementById('deckB'),
                 clearButton: document.getElementById('clearDeckB'),
                 currentTrackName: null,
+                crossfadeTriggered: false,
                 analyser: null, gainNode: null, sourceNode: null, dataArray: null, animationFrameId: null, currentTrackIndex: -1
             }
         };
@@ -404,6 +425,7 @@
         let playlist = []; 
         let autoPlayQueue = []; 
         let autoPlayCurrentDeckId = null; 
+        let crossfadeAnimationId = null; // Variable para controlar la animación del crossfader
 
         function initAudioContext() {
             if (!audioContext) {
@@ -413,7 +435,7 @@
                 }
             }
             if (audioContext.state === 'suspended') {
-                audioContext.resume().catch(e => console.error("Error resuming AudioContext:", e));
+                audioContext.resume().catch(e => console.error("Error al reanudar AudioContext:", e));
             }
         }
 
@@ -529,6 +551,102 @@
                 calculatedGain = crossfaderValue;
             }
             deck.gainNode.gain.value = Math.max(0, calculatedGain) * deckVolumeValue;
+        }
+
+        // --- FUNCIÓN PARA MOVER EL CROSSFADER SUAVEMENTE ---
+        function smoothCrossfade(targetValue, durationMs, onComplete = null) {
+            const crossfaderInput = document.getElementById('crossfader');
+            if (!crossfaderInput) return;
+
+            // Si ya hay una animación corriendo, la cancelamos
+            if (crossfadeAnimationId) {
+                cancelAnimationFrame(crossfadeAnimationId);
+            }
+
+            const startValue = parseFloat(crossfaderInput.value);
+            const startTime = performance.now();
+
+            function step(currentTime) {
+                const elapsed = currentTime - startTime;
+                let progress = elapsed / durationMs;
+
+                if (progress >= 1) progress = 1;
+
+                // Suavizado (easing) para que no sea un movimiento tan brusco
+                const easeProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                const currentValue = startValue + (targetValue - startValue) * easeProgress;
+                crossfaderInput.value = currentValue;
+
+                applyCrossfaderAndVolume('A');
+                applyCrossfaderAndVolume('B');
+                updateCrossfaderDisplay();
+
+                if (progress < 1) {
+                    crossfadeAnimationId = requestAnimationFrame(step);
+                } else {
+                    crossfadeAnimationId = null; // Terminó la animación
+                    if (onComplete) onComplete(); // Llamada al terminar para reiniciar el switch
+                }
+            }
+            crossfadeAnimationId = requestAnimationFrame(step);
+        }
+
+        function resetImmediateMixBtn() {
+            if(immediateMixBtn) {
+                immediateMixBtn.classList.remove('btn-active-green');
+                immediateMixBtn.disabled = false;
+            }
+        }
+
+        function triggerImmediateMix() {
+            let activeDeckId = null;
+            let targetDeckId = null;
+
+            if (!decks.A.audio.paused && decks.B.audio.paused) {
+                activeDeckId = 'A'; targetDeckId = 'B';
+            } else if (!decks.B.audio.paused && decks.A.audio.paused) {
+                activeDeckId = 'B'; targetDeckId = 'A';
+            } else if (!decks.A.audio.paused && !decks.B.audio.paused) {
+                const cfValue = parseFloat(crossfader.value);
+                if (cfValue <= 0.5) { activeDeckId = 'A'; targetDeckId = 'B'; }
+                else { activeDeckId = 'B'; targetDeckId = 'A'; }
+            }
+
+            if (activeDeckId && targetDeckId) {
+                const activeDeck = decks[activeDeckId];
+                const targetDeck = decks[targetDeckId];
+
+                if (targetDeck.currentTrackIndex !== -1 && targetDeck.audio.src) {
+                    activeDeck.crossfadeTriggered = true;
+                    targetDeck.audio.play().then(() => {
+                        updatePlayPauseButton(targetDeckId, true);
+                        const targetCrossfader = (targetDeckId === 'A') ? 0 : 1;
+                        smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn);
+                    }).catch(e => {
+                        console.error("Error al iniciar mix inmediato:", e);
+                        resetImmediateMixBtn();
+                    });
+                } else if (autoPlayQueue.length > 0) {
+                    activeDeck.crossfadeTriggered = true;
+                    const nextTrackInQueue = autoPlayQueue.shift();
+                    renderAutoPlayQueue();
+                    
+                    loadTrackToDeck(targetDeckId, playlist.findIndex(p => p.id === nextTrackInQueue.id), true);
+                    decks[targetDeckId].audio.play().then(() => {
+                        updatePlayPauseButton(targetDeckId, true);
+                        const targetCrossfader = (targetDeckId === 'A') ? 0 : 1;
+                        smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn);
+                    }).catch(e => {
+                        console.error("Error autoplay inmediato:", e);
+                        resetImmediateMixBtn();
+                    });
+                } else {
+                    resetImmediateMixBtn();
+                }
+            } else {
+                resetImmediateMixBtn();
+            }
         }
 
         function processFiles(filesList, defaultCategory) {
@@ -726,6 +844,7 @@
             const track = playlist[trackOriginalIndex];
             deck.currentTrackIndex = trackOriginalIndex;
             deck.currentTrackName = track.name;
+            deck.crossfadeTriggered = false;
             if (deck.animationFrameId) cancelAnimationFrame(deck.animationFrameId);
             if (deck.audio.src) deck.audio.pause();
             deck.audio.src = track.url;
@@ -753,9 +872,36 @@
                 applyCrossfaderAndVolume(deckId);
                 updatePlayPauseButton(deckId, false);
             };
-            deck.audio.ontimeupdate = () => updateDeckTimes(deckId);
             
-            // LÓGICA DE COLA AUTOMÁTICA Y MOVIMIENTO DE CROSSFADER
+            // LÓGICA DE COLA AUTOMÁTICA ADELANTADA (15 SEGUNDOS ANTES)
+            deck.audio.ontimeupdate = () => {
+                updateDeckTimes(deckId);
+                
+                // Disparar la siguiente pista faltando 15 segundos
+                if (autoPlayQueue.length > 0 && deck.audio.duration) {
+                    const remaining = deck.audio.duration - deck.audio.currentTime;
+                    if (remaining <= 15 && !deck.crossfadeTriggered) {
+                        deck.crossfadeTriggered = true; // Evita que se dispare varias veces seguidas
+                        
+                        const nextTrackInQueue = autoPlayQueue.shift();
+                        renderAutoPlayQueue();
+                        const otherDeckId = (deckId === 'A' ? 'B' : 'A');
+                        loadTrackToDeck(otherDeckId, playlist.findIndex(p => p.id === nextTrackInQueue.id), true);
+                        
+                        decks[otherDeckId].audio.play().then(() => {
+                            updatePlayPauseButton(otherDeckId, true);
+                            
+                            // --- ANIMACIÓN DEL CROSSFADER ---
+                            const targetCrossfader = (otherDeckId === 'A') ? 0 : 1;
+                            // 15000 ms (15 segundos) para que termine de cruzar justo cuando se acaba la pista
+                            smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn); 
+
+                        }).catch(e => console.error("Error autoplay:", e));
+                        autoPlayCurrentDeckId = otherDeckId;
+                    }
+                }
+            };
+            
             deck.audio.onended = () => {
                 updatePlayPauseButton(deckId, false);
                 deck.currentTime.textContent = formatTime(deck.audio.duration);
@@ -766,29 +912,9 @@
                     deck.animationFrameId = null;
                     clearVisualizer(deckId);
                 }
-                if (autoPlayQueue.length > 0) {
-                    const nextTrackInQueue = autoPlayQueue.shift();
-                    renderAutoPlayQueue();
-                    const otherDeckId = (deckId === 'A' ? 'B' : 'A');
-                    loadTrackToDeck(otherDeckId, playlist.findIndex(p => p.id === nextTrackInQueue.id), true);
-                    
-                    decks[otherDeckId].audio.play().then(() => {
-                        updatePlayPauseButton(otherDeckId, true);
-                        
-                        // --- AQUÍ ESTÁ EL AJUSTE PARA MOVER EL CROSSFADER ---
-                        const crossfaderInput = document.getElementById('crossfader');
-                        if (crossfaderInput) {
-                            // Si salta al Deck A, pone el crossfader en 0. Si va al B, lo pone en 1.
-                            crossfaderInput.value = (otherDeckId === 'A') ? 0 : 1;
-                            applyCrossfaderAndVolume('A');
-                            applyCrossfaderAndVolume('B');
-                            updateCrossfaderDisplay();
-                        }
-                        // ----------------------------------------------------
-
-                    }).catch(e => console.error("Error autoplay:", e));
-                    autoPlayCurrentDeckId = otherDeckId;
-                } else {
+                
+                // Si la cola estaba vacía y no se disparó el crossfade temprano, limpiamos el estado
+                if (autoPlayQueue.length === 0 && !deck.crossfadeTriggered) {
                     autoPlayCurrentDeckId = null;
                 }
             };
@@ -893,6 +1019,15 @@
         }
 
         // --- Event Listeners Iniciales ---
+        
+        immediateMixBtn.addEventListener('click', () => {
+            if (immediateMixBtn.classList.contains('btn-active-green')) return; // Evitar que se presione varias veces seguidas
+            
+            immediateMixBtn.classList.add('btn-active-green');
+            immediateMixBtn.disabled = true; // Desactivar temporalmente mientras hace la mezcla
+            triggerImmediateMix();
+        });
+
         fileInputMusic.addEventListener('change', (event) => {
             const files = Array.from(event.target.files);
             processFiles(files, 'music');
@@ -969,6 +1104,12 @@
         });
 
         crossfader.addEventListener('input', () => {
+            // Si el usuario toca el crossfader manualmente, detenemos la animación suave
+            if (crossfadeAnimationId) {
+                cancelAnimationFrame(crossfadeAnimationId);
+                crossfadeAnimationId = null;
+            }
+            resetImmediateMixBtn();
             applyCrossfaderAndVolume('A');
             applyCrossfaderAndVolume('B');
             updateCrossfaderDisplay();
