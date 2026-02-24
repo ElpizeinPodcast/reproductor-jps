@@ -623,7 +623,7 @@
                     targetDeck.audio.play().then(() => {
                         updatePlayPauseButton(targetDeckId, true);
                         const targetCrossfader = (targetDeckId === 'A') ? 0 : 1;
-                        smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn);
+                        smoothCrossfade(targetCrossfader, 10000, resetImmediateMixBtn);
                     }).catch(e => {
                         console.error("Error al iniciar mix inmediato:", e);
                         resetImmediateMixBtn();
@@ -637,7 +637,7 @@
                     decks[targetDeckId].audio.play().then(() => {
                         updatePlayPauseButton(targetDeckId, true);
                         const targetCrossfader = (targetDeckId === 'A') ? 0 : 1;
-                        smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn);
+                        smoothCrossfade(targetCrossfader, 10000, resetImmediateMixBtn);
                     }).catch(e => {
                         console.error("Error autoplay inmediato:", e);
                         resetImmediateMixBtn();
@@ -874,14 +874,14 @@
                 updatePlayPauseButton(deckId, false);
             };
             
-            // LÓGICA DE COLA AUTOMÁTICA ADELANTADA (15 SEGUNDOS ANTES)
+            // LÓGICA DE COLA AUTOMÁTICA ADELANTADA (10 SEGUNDOS ANTES)
             deck.audio.ontimeupdate = () => {
                 updateDeckTimes(deckId);
                 
-                // Disparar la siguiente pista faltando 15 segundos
+                // Disparar la siguiente pista faltando 10 segundos
                 if (autoPlayQueue.length > 0 && deck.audio.duration) {
                     const remaining = deck.audio.duration - deck.audio.currentTime;
-                    if (remaining <= 15 && !deck.crossfadeTriggered) {
+                    if (remaining <= 10 && !deck.crossfadeTriggered) {
                         deck.crossfadeTriggered = true; // Evita que se dispare varias veces seguidas
                         
                         const nextTrackInQueue = autoPlayQueue.shift();
@@ -894,8 +894,8 @@
                             
                             // --- ANIMACIÓN DEL CROSSFADER ---
                             const targetCrossfader = (otherDeckId === 'A') ? 0 : 1;
-                            // 15000 ms (15 segundos) para que termine de cruzar justo cuando se acaba la pista
-                            smoothCrossfade(targetCrossfader, 15000, resetImmediateMixBtn); 
+                            // 10000 ms (10 segundos) para que termine de cruzar justo cuando se acaba la pista
+                            smoothCrossfade(targetCrossfader, 10000, resetImmediateMixBtn); 
 
                         }).catch(e => console.error("Error autoplay:", e));
                         autoPlayCurrentDeckId = otherDeckId;
