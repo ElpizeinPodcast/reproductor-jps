@@ -175,7 +175,8 @@
                     <label for="fileInputMusic" class="neu-btn py-1 px-3 flex items-center justify-center cursor-pointer hover:text-cyan-400 transition-colors text-xs font-semibold flex-shrink-0">
                         <i class="fas fa-plus mr-1"></i> Añadir Pistas
                     </label>
-                    <input type="file" id="fileInputMusic" multiple accept="audio/*,video/*,.aac,.wma" class="hidden">
+                    <!-- Permite cualquier archivo -->
+                    <input type="file" id="fileInputMusic" multiple accept="audio/*,video/*" class="hidden">
                     
                     <div class="relative flex-grow">
                         <input type="text" id="searchMusicInput" placeholder="Buscar música..." class="w-full p-1 pl-2 pr-6 rounded search-input-neu text-xs">
@@ -197,7 +198,8 @@
                     <label for="fileInputRecordings" class="neu-btn py-1 px-3 flex items-center justify-center cursor-pointer hover:text-red-400 transition-colors text-xs font-semibold flex-shrink-0">
                         <i class="fas fa-plus mr-1"></i> Añadir Pistas
                     </label>
-                    <input type="file" id="fileInputRecordings" multiple accept="audio/*,video/*,.aac,.wma" class="hidden">
+                    <!-- Permite cualquier archivo -->
+                    <input type="file" id="fileInputRecordings" multiple accept="audio/*,video/*" class="hidden">
                     
                     <div class="relative flex-grow">
                         <input type="text" id="searchRecordingsInput" placeholder="Buscar grabación..." class="w-full p-1 pl-2 pr-6 rounded search-input-neu text-xs">
@@ -233,12 +235,12 @@
 
     <main class="flex-grow flex flex-col p-2 md:p-4 z-10">
         
-        <!-- PANTALLITA DIGITAL PEQUEÑA PARA RELOJ Y RADIO -->
+        <!-- PANTALLITA DIGITAL PEQUEÑA PARA RELOJ Y RADIO (Agrandada y con | brillante) -->
         <div class="w-full flex justify-end mb-3">
             <div class="flex items-center space-x-3 px-5 py-2 bg-[#0a0a0c] rounded-md border border-[#222] shadow-[inset_0_2px_5px_rgba(0,0,0,1)]">
-                <span id="clockDeckB" class="text-lg sm:text-xl text-yellow-400 glow-text-yellow" style="font-family: 'Share Tech Mono', monospace;">00:00:00 AM</span>
-                <span class="text-cyan-400 glow-text-blue text-xl sm:text-2xl font-bold pb-1">|</span>
-                <span class="text-lg sm:text-xl font-bold text-white glow-text-white tracking-widest" style="font-family: 'Share Tech Mono', monospace;">RADIO CEB</span>
+                <span id="clockDeckB" class="text-xl sm:text-2xl text-yellow-400 glow-text-yellow" style="font-family: 'Share Tech Mono', monospace;">00:00:00 AM</span>
+                <span class="text-cyan-400 glow-text-blue text-2xl sm:text-3xl font-bold pb-1">|</span>
+                <span class="text-xl sm:text-2xl font-bold text-white glow-text-white tracking-widest" style="font-family: 'Share Tech Mono', monospace;">RADIO CEB</span>
             </div>
         </div>
 
@@ -658,41 +660,35 @@
             if (pRec && defaultCategory === 'recording') pRec.remove();
 
             filesList.forEach(file => {
-                const extension = file.name.split('.').pop().toLowerCase();
-                const validExtensions = ['aac', 'wma', 'mp3', 'wav', 'ogg', 'flac', 'm4a', 'mp4', 'webm'];
-                if (file.type.startsWith('audio/') || file.type.startsWith('video/') || validExtensions.includes(extension)) {
-                    const trackUrl = URL.createObjectURL(file);
-                    const tempAudio = new Audio(trackUrl);
-                    tempAudio.onloadedmetadata = () => {
-                        const track = {
-                            name: file.name,
-                            url: trackUrl,
-                            duration: tempAudio.duration,
-                            file: file,
-                            id: Date.now().toString(36) + Math.random().toString(36).substring(2),
-                            category: defaultCategory
-                        };
-                        playlist.push(track);
-                        filesProcessed++;
-                        if (filesProcessed === filesList.length) {
-                            renderPlaylist();
-                            updateTotalPlaylistTime();
-                        }
+                // Eliminamos cualquier restricción para que permita procesar audio y video
+                const trackUrl = URL.createObjectURL(file);
+                const tempAudio = new Audio(trackUrl);
+                
+                tempAudio.onloadedmetadata = () => {
+                    const track = {
+                        name: file.name,
+                        url: trackUrl,
+                        duration: tempAudio.duration,
+                        file: file,
+                        id: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                        category: defaultCategory
                     };
-                    tempAudio.onerror = () => {
-                        filesProcessed++;
-                        if (filesProcessed === filesList.length) {
-                            renderPlaylist();
-                            updateTotalPlaylistTime();
-                        }
-                    };
-                } else {
+                    playlist.push(track);
                     filesProcessed++;
                     if (filesProcessed === filesList.length) {
                         renderPlaylist();
                         updateTotalPlaylistTime();
                     }
-                }
+                };
+                
+                tempAudio.onerror = () => {
+                    console.warn("No se pudo cargar el archivo:", file.name);
+                    filesProcessed++;
+                    if (filesProcessed === filesList.length) {
+                        renderPlaylist();
+                        updateTotalPlaylistTime();
+                    }
+                };
             });
         }
 
