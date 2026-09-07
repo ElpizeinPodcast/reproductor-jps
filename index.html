@@ -10,8 +10,8 @@
             --bg: #0a0a0a;
             --panel: #1a1a1a;
             --panel2: #242424;
-            --accent: #39ff14;  /* verde fluorescente */
-            --accent2: #ffff00; /* amarillo */
+            --accent: #39ff14;
+            --accent2: #ffff00;
             --text: #ffffff;
             --text2: #cccccc;
             --slider-bg: #333333;
@@ -124,7 +124,6 @@
             box-shadow: 0 0 10px rgba(255,255,0,0.5);
         }
 
-        /* Barra de búsqueda */
         .search-container {
             display: flex;
             align-items: center;
@@ -569,6 +568,12 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            outline: none;
+        }
+        .crossfader-container:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+            border-radius: 8px;
         }
         .crossfader-track {
             position: relative;
@@ -628,6 +633,7 @@
             .crossfader-fill { bottom: auto; top: 0; left: 0; height: 100%; width: 0%; background: linear-gradient(to right, var(--deck-a), #555, var(--deck-b)); transition: width 0.05s; }
             .crossfader-thumb { left: 0%; top: 50%; transform: translate(-50%, -50%); transition: left 0.05s; }
             .crossfader-labels { flex-direction: row; height: auto; width: 160px; position: static; justify-content: space-between; }
+            .crossfader-container:focus-visible { outline-offset: 2px; }
         }
 
         .drop-hint {
@@ -703,10 +709,10 @@
             <div class="drop-hint">⬇ Soltar para cargar</div>
         </div>
 
-        <!-- Crossfader -->
+        <!-- Crossfader con tabindex para foco -->
         <div class="crossfader-section">
             <span class="crossfader-label">CROSSFADER</span>
-            <div class="crossfader-container" id="crossfader-container">
+            <div class="crossfader-container" id="crossfader-container" tabindex="0" role="slider" aria-valuemin="-1" aria-valuemax="1" aria-valuenow="0" aria-label="Crossfader">
                 <div class="crossfader-track" id="crossfader-track">
                     <div class="crossfader-fill" id="crossfader-fill" style="height:50%;"></div>
                     <div class="crossfader-thumb" id="crossfader-thumb" style="top:50%;"></div>
@@ -882,10 +888,9 @@
                 if (filtered.length === 0) {
                     const msg = searchTerm.trim() ? 'No se encontraron pistas para la búsqueda.' : 'No hay pistas cargadas. Arrastra archivos aquí o usa el botón.';
                     playlistEl.innerHTML = `<div class="playlist-empty">${msg}</div>`;
-                    playlistCount.textContent = playlist.length; // total real
+                    playlistCount.textContent = playlist.length;
                     return;
                 }
-                // Mostrar contador según filtro
                 playlistCount.textContent = searchTerm.trim() ? `${filtered.length} de ${playlist.length}` : playlist.length;
                 for (const track of filtered) {
                     playlistEl.appendChild(createPlaylistItem(track));
@@ -968,11 +973,13 @@
                 setTimeout(() => { callback(track.duration); try { tempVideo.removeAttribute('src'); tempVideo.load(); } catch(e) {} }, 5000);
             }
 
+            // Función modificada para incluir confirmación
             function loadTrackToDeck(deckKey, trackId) {
                 const deck = decks[deckKey];
                 const track = findTrackById(trackId);
                 if (!track) return false;
 
+                // Si la misma pista ya está cargada, no hacer nada (o reiniciar si está detenida)
                 if (deck.currentTrackId === trackId) {
                     if (!deck.isPlaying) {
                         deck.video.currentTime = 0;
@@ -982,6 +989,15 @@
                     return true;
                 }
 
+                // Si el deck está reproduciendo una pista diferente, pedir confirmación
+                if (deck.isPlaying && deck.currentTrackId !== null) {
+                    const confirmChange = confirm(`El Deck ${deckKey.toUpperCase()} está reproduciendo una pista. ¿Estás seguro de cambiarla?`);
+                    if (!confirmChange) {
+                        return false; // No se cambia
+                    }
+                }
+
+                // Detener reproducción anterior (si la hay)
                 deck.video.pause();
                 deck.isPlaying = false;
                 deck.playBtn.textContent = '▶ Play';
@@ -1122,11 +1138,19 @@
                     deck.volumeValue.textContent = Math.round(deck.volume * 100) + '%';
                     applyCrossfader();
                 });
+
+                // Selector de pista: manejar confirmación y revertir si se cancela
                 deck.trackSelect.addEventListener('change', () => {
                     const val = deck.trackSelect.value;
                     if (val) {
-                        loadTrackToDeck(deckKey, parseInt(val));
+                        const previousValue = deck.currentTrackId ? String(deck.currentTrackId) : '';
+                        const success = loadTrackToDeck(deckKey, parseInt(val));
+                        if (!success) {
+                            // Revertir selector
+                            deck.trackSelect.value = previousValue;
+                        }
                     } else {
+                        // Opción "— Seleccionar pista —" vacía: limpiar deck sin confirmación
                         deck.video.pause();
                         deck.video.removeAttribute('src');
                         deck.video.load();
@@ -1149,6 +1173,7 @@
                         applyCrossfader();
                     }
                 });
+
                 deck.playBtn.addEventListener('click', () => togglePlay(deckKey));
                 deck.stopBtn.addEventListener('click', () => stopDeck(deckKey));
             }
@@ -1172,6 +1197,7 @@
                 const topPercent = (crossfaderValue + 1) / 2 * 100;
                 crossfaderThumb.style.top = topPercent + '%';
                 crossfaderFill.style.height = topPercent + '%';
+                crossfaderContainer.setAttribute('aria-valuenow', crossfaderValue.toFixed(2));
             }
 
             function setupCrossfader() {
@@ -1194,13 +1220,58 @@
                     applyCrossfader();
                     updateCrossfaderUI();
                 }
-                crossfaderTrack.addEventListener('mousedown', (e) => { isDragging = true; setCrossfader(getValueFromEvent(e)); e.preventDefault(); });
-                document.addEventListener('mousemove', (e) => { if (isDragging) setCrossfader(getValueFromEvent(e)); });
-                document.addEventListener('mouseup', () => { isDragging = false; });
-                crossfaderTrack.addEventListener('touchstart', (e) => { isDragging = true; setCrossfader(getValueFromEvent(e)); e.preventDefault(); }, { passive: false });
-                document.addEventListener('touchmove', (e) => { if (isDragging) setCrossfader(getValueFromEvent(e)); }, { passive: false });
-                document.addEventListener('touchend', () => { isDragging = false; });
-                crossfaderTrack.addEventListener('dblclick', () => setCrossfader(0));
+
+                crossfaderTrack.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    setCrossfader(getValueFromEvent(e));
+                    crossfaderContainer.focus();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) setCrossfader(getValueFromEvent(e));
+                });
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+
+                crossfaderTrack.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    setCrossfader(getValueFromEvent(e));
+                    crossfaderContainer.focus();
+                    e.preventDefault();
+                }, { passive: false });
+                document.addEventListener('touchmove', (e) => {
+                    if (isDragging) setCrossfader(getValueFromEvent(e));
+                }, { passive: false });
+                document.addEventListener('touchend', () => {
+                    isDragging = false;
+                });
+
+                crossfaderTrack.addEventListener('dblclick', () => {
+                    setCrossfader(0);
+                });
+
+                crossfaderContainer.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const step = 0.05;
+                        if (e.key === 'ArrowUp') {
+                            // Subir: hacia Deck A (disminuir valor)
+                            setCrossfader(crossfaderValue - step);
+                        } else {
+                            // Bajar: hacia Deck B (aumentar valor)
+                            setCrossfader(crossfaderValue + step);
+                        }
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        setCrossfader(-1);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        setCrossfader(1);
+                    }
+                });
+
                 setCrossfader(0);
             }
 
